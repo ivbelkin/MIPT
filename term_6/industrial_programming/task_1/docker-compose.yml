@@ -1,0 +1,61 @@
+version: "3"
+
+services:
+ #   sender:
+ #       build: ./sender
+ #       networks:
+ #           - frontend
+ #       volumes:
+ #           - ./sender/src:/app/src
+ #       depends_on:
+ #           - rabbit
+ #       stdin_open: true
+ #       tty: true
+
+    receiver:
+        build: ./receiver
+        restart: always
+        networks:
+            - backend
+        volumes:
+            - ./receiver/src:/app/src
+        depends_on:
+            - rabbit
+            - db
+
+    rabbit:
+        image: rabbitmq:3
+        restart: always
+        networks:
+            - frontend
+            - backend
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+
+    db:
+        image: postgres:10
+        restart: always
+        volumes: 
+            - /tmp/ivbelkin/task1/postgresql/data/pgdata:/var/lib/postgresql/data/pgdata
+        networks:
+            - backend
+        environment: 
+            - PGDATA=/var/lib/postgresql/data/pgdata
+            - POSTGRES_DB=ivbelkin_db
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+    
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
+        networks: 
+            - backend
+        depends_on:
+            - db
+
+networks:
+    frontend:
+    backend:

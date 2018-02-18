@@ -10,19 +10,22 @@ def main():
     channel.queue_declare(queue="hello")
     stdout.write("Established.\n")
 
+    msg = None
     stdout.write("\nEnter a message. To exit press CTRL+C.\n")
     while True:
         try:
-            msg = input(">>> ")
+            if not msg:
+                msg = input(">>> ")
             channel.basic_publish(exchange="",
                 routing_key="hello",
                 body=msg.encode())
+            msg = None
         except KeyboardInterrupt:
             stdout.write("\n")
             connection.close()
             break
         except pika.exceptions.AMQPError:
-            connection = connect()
+            connection = connect("localhost")
             channel = connection.channel()
             continue
 

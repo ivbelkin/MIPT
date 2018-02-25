@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To-Do List</title>
+    <style>
+        body {
+            padding-left: 25%;
+            width: 50%;
+            min-width: 300pt;
+            max-width: 500pt;
+            background-color: snow;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+        }
+        td {
+            text-align: left;
+            background-color: lightgray;
+            border-radius: 5pt;
+            padding: 5pt;
+        }
+        tr {
+            margin: 10pt;
+        }
+        .task_name {
+            padding-left: 10pt;
+        }
+        .add_item {
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+        .add_item_text {
+            width: 80%;
+        }
+        .add_button {
+            width: 10%;
+            min-width: 30pt;
+        }
+        .del_button {
+            margin-left: 10%;
+        }
+        input {
+            border-radius: 5pt;
+            padding: 5pt;
+        }
+        button {
+            padding: 5pt;
+        }
+        .chboxcell {
+            background-color: snow;
+        }
+        .chbox {
+            width: 15pt;
+            height: 15pt;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>To Do List</h1>
+    <form action="{% url 'todolist:add_task' %}" method="post" class="add_item">
+        {% csrf_token %}
+        <input type="text" name="Task_name" placeholder="What do you want to do today?" 
+            class="add_item_text" autofocus required>
+        <button type="submit" class="add_button">Add</button>
+    </form>
+    <br />
+    <form action="{% url 'todolist:del_task' %}" method="post">
+        {% csrf_token %}
+        
+            <table>
+            {% for task in tasks %}
+                <tr>
+                    <td width="10pt" class="chboxcell">
+                        <input type="checkbox" class="chbox" name="task_to_del" 
+                            id="checkbox{{ forloop.counter }}" value="{{ task.id }}" />
+                    </td>
+                    <td class="task_name">
+                        {{ task.task_name }}
+                    </td>
+                </tr>
+            {% empty %}
+                <p align="center">You have no tasks, but you can add them!</p>
+            {% endfor %}
+        </table>
+        <br />
+        <button type="submit" class="del_button">Delete selected tasks</button>
+    </form>
+</body>
+</html>
+

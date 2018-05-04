@@ -1,0 +1,3 @@
+/home/ivb/Documents/MIPT/term_6/prog_lang/seminars/array/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/ivb/Documents/MIPT/term_6/prog_lang/seminars/array/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ivb/Documents/MIPT/term_6/prog_lang/seminars/array/cmake-build-debug/CMakeFiles/array.dir

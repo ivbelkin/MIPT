@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ivb/Documents/MIPT/term_6/prog_lang/seminars/tokenizer/main.cpp
+iostream
+-
+fstream
+-
+string
+-
+sstream
+-
+

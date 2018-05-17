@@ -71,7 +71,7 @@ class Queryable:
         return self
 
 
-    def ToLost(self):
+    def ToList(self):
         seqlist = []
         for value in self.sequence:
             seqlist.append(value)

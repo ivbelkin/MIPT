@@ -21,14 +21,14 @@ def main():
        Queryable(range(10)).Where(lambda x: x % 2 == 0)
                            .Select(lambda x: x ** 2)
                            .Take(2)
-                           .ToLost()
+                           .ToList()
     )
 
     print(
         Queryable(fibo()).Where(lambda x: x % 3 == 0)
                          .Select(lambda x: x ** 2 if x % 2 == 0 else x)
                          .Take(5)
-                         .ToLost()
+                         .ToList()
     )
 
     print(
@@ -37,7 +37,7 @@ def main():
                                          .GroupBy(lambda x: x)
                                          .Select(lambda x: (x[0], len(x[1])))
                                          .OrderBy(lambda x: -x[1])
-                                         .ToLost()
+                                         .ToList()
     )
 
 
